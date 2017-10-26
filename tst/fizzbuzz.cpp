@@ -41,6 +41,17 @@ TEST_CASE("fizzbuzz") {
       }
    }
 
+   SUBCASE("number is \"buzz\" if contains \"5\" digit") {
+      const auto nums = std::experimental::make_array(52, 56, 58, 59);
+
+      for (auto n: nums) {
+         CAPTURE(n);
+         REQUIRE(n%5 != 0);
+         REQUIRE(n%3 != 0);
+         CHECK(fizzbuzz(n) == "buzz");
+      }
+   }
+
    SUBCASE("number is \"fizzbuzz\" when divisible both by 3 and 5") {
       const auto nums = std::experimental::make_array(15, 30, 45, 60, 75,
             90);
