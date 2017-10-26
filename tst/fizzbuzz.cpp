@@ -36,4 +36,15 @@ TEST_CASE("fizzbuzz") {
          CHECK(fizzbuzz(n) == "fizzbuzz");
       }
    }
+
+   SUBCASE("translate number to text when not divisible by 3 or 5") {
+      const auto nums = std::experimental::make_array(1, 2, 4, 7, 8, 11, 13,
+            14, 16, 17, 19);
+
+      for (auto n: nums) {
+         REQUIRE(n%3 != 0);
+         REQUIRE(n%5 != 0);
+         CHECK(fizzbuzz(n) == std::to_string(n));
+      }
+   }
 }
