@@ -20,7 +20,7 @@ constexpr bool is_fizz(int n) noexcept {
 }
 
 constexpr bool is_buzz(int n) noexcept {
-   return n%5 == 0;
+   return n%5 == 0 || has_digit(n, 5);
 }
 
 }
