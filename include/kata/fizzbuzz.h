@@ -10,7 +10,7 @@ inline std::string fizzbuzz(int n) {
       oss << "fizz";
    if (n%5 == 0)
       oss << "buzz";
-   return oss.str();
+   return oss.str().empty() ? std::to_string(n) : oss.str();
 }
 
 }
