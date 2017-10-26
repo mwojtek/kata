@@ -1,11 +1,16 @@
 #pragma once
-#include <string>
+#include <sstream>
 
 
 namespace kata {
 
 inline std::string fizzbuzz(int n) {
-   return n%3 ? "buzz" : "fizz";
+   std::ostringstream oss;
+   if (n%3 == 0)
+      oss << "fizz";
+   if (n%5 == 0)
+      oss << "buzz";
+   return oss.str();
 }
 
 }
