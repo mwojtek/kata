@@ -5,7 +5,7 @@
 namespace kata {
 
 inline std::string fizzbuzz(int n) {
-   return "fizz";
+   return n%3 ? "buzz" : "fizz";
 }
 
 }
