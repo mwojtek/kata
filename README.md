@@ -19,3 +19,6 @@ Just for fun...
     cd build
     make
     ./kata # or ctest
+
+# Kata
+* [FizzBuzz](http://codingdojo.org/kata/FizzBuzz)
