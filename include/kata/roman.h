@@ -4,7 +4,7 @@
 namespace kata {
 
 inline std::string to_roman(int n) {
-   return "I";
+   return n == 1 ? "I" : "II";
 }
 
 }
