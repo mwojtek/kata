@@ -12,4 +12,5 @@ TEST_CASE("roman numerals") {
    CHECK(to_roman(6) == "VI");
    CHECK(to_roman(7) == "VII");
    CHECK(to_roman(8) == "VIII");
+   CHECK(to_roman(9) == "IX");
 }
