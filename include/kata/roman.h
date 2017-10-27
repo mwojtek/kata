@@ -1,20 +1,19 @@
 #pragma once
+#include <experimental/array>
 #include <sstream>
 
 namespace kata {
 
 inline std::string to_roman(int n) {
+   constexpr auto nums = std::experimental::make_array(std::make_pair(5, "V"),
+         std::make_pair(4, "IV"), std::make_pair(1, "I"));
    std::stringstream oss;
-   if (n > 4) {
-      n -= 5;
-      oss << "V";
+   for (const auto& d: nums) {
+      while (n >= d.first) {
+         n -= d.first;
+         oss << d.second;
+      }
    }
-   if (n > 3) {
-      n -= 4;
-      oss << "IV";
-   }
-   while (n-- > 0)
-      oss << "I";
    return oss.str();
 }
 
