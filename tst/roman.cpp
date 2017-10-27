@@ -14,4 +14,18 @@ TEST_CASE("roman numerals") {
    CHECK(to_roman(8) == "VIII");
    CHECK(to_roman(9) == "IX");
    CHECK(to_roman(10) == "X");
+   CHECK(to_roman(11) == "XI");
+   CHECK(to_roman(22) == "XXII");
+   CHECK(to_roman(33) == "XXXIII");
+   CHECK(to_roman(44) == "XLIV");
+   CHECK(to_roman(55) == "LV");
+   CHECK(to_roman(66) == "LXVI");
+   CHECK(to_roman(77) == "LXXVII");
+   CHECK(to_roman(88) == "LXXXVIII");
+   CHECK(to_roman(99) == "XCIX");
+   CHECK(to_roman(111) == "CXI");
+   CHECK(to_roman(432) == "CDXXXII");
+   CHECK(to_roman(542) == "DXLII");
+   CHECK(to_roman(900) == "CM");
+   CHECK(to_roman(3000) == "MMM");
 }
