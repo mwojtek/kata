@@ -5,18 +5,19 @@ using namespace kata;
 
 TEST_CASE("roman numerals") {
    SUBCASE("integer to roman") {
+      SUBCASE("single digit") {
+         for (const auto& rd: detail::roman_digits)
+            CHECK(to_roman(rd.first) == rd.second);
+      }
       SUBCASE("valid input") {
          CHECK(to_roman(0) == "");
-         CHECK(to_roman(1) == "I");
          CHECK(to_roman(2) == "II");
          CHECK(to_roman(3) == "III");
          CHECK(to_roman(4) == "IV");
-         CHECK(to_roman(5) == "V");
          CHECK(to_roman(6) == "VI");
          CHECK(to_roman(7) == "VII");
          CHECK(to_roman(8) == "VIII");
          CHECK(to_roman(9) == "IX");
-         CHECK(to_roman(10) == "X");
          CHECK(to_roman(11) == "XI");
          CHECK(to_roman(22) == "XXII");
          CHECK(to_roman(33) == "XXXIII");
@@ -37,8 +38,29 @@ TEST_CASE("roman numerals") {
       }
    }
    SUBCASE("roman to integer") {
+      SUBCASE("single digit") {
+         for (const auto& rd: detail::roman_digits)
+            CHECK(from_roman(rd.second) == rd.first);
+      }
       SUBCASE("valid input") {
          CHECK(from_roman("") == 0);
+         CHECK(from_roman("II") == 2);
+         CHECK(from_roman("III") == 3);
+      }
+      SUBCASE("invalid input") {
+         constexpr auto not_a_roman = std::experimental::make_array("i", "IIII");
+
+         for (const auto nar: not_a_roman) {
+            bool exception_catch = false;
+            CAPTURE(nar);
+            try {
+               from_roman(nar);
+            } catch (const std::runtime_error& re) {
+               exception_catch = true;
+               CHECK(!std::strcmp(re.what(), "not a roman numeral"));
+            }
+            CHECK(exception_catch);
+         }
       }
    }
 }
