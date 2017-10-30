@@ -22,4 +22,9 @@ inline std::string to_roman(int n) {
    return oss.str();
 }
 
+
+inline int from_roman(const std::string& str) {
+   return 0;
+}
+
 }
