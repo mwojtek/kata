@@ -4,13 +4,29 @@
 using namespace kata;
 
 TEST_CASE("roman numerals") {
+   constexpr auto roman = std::experimental::make_array(
+               std::make_pair("", 0),
+               std::make_pair("MCXI", 1111),
+               std::make_pair("MMCCXXII", 2222),
+               std::make_pair("MMMCCCXXXIII", 3333),
+               std::make_pair("MMMMCDXLIV", 4444),
+               std::make_pair("MMMMMDLV", 5555),
+               std::make_pair("MMMMMMDCLXVI", 6666),
+               std::make_pair("MMMMMMMDCCLXXVII", 7777),
+               std::make_pair("MMMMMMMMDCCCLXXXVIII", 8888),
+               std::make_pair("MMMMMMMMMCMXCIX", 9999)
+            );
+
    SUBCASE("integer to roman") {
       SUBCASE("single digit") {
          for (const auto& rd: detail::roman_digits)
             CHECK(to_roman(rd.first) == rd.second);
       }
+
       SUBCASE("valid input") {
-         CHECK(to_roman(0) == "");
+         for (const auto& r: roman)
+            CHECK(to_roman(r.second) == r.first);
+
          CHECK(to_roman(2) == "II");
          CHECK(to_roman(3) == "III");
          CHECK(to_roman(4) == "IV");
@@ -33,28 +49,43 @@ TEST_CASE("roman numerals") {
          CHECK(to_roman(900) == "CM");
          CHECK(to_roman(3000) == "MMM");
       }
+
       SUBCASE("invalid input") {
-         CHECK(to_roman(-1) == "");
+         CHECK(v0::to_roman(-1) == "");
+
+         bool exception_catch = false;
+
+         try {
+            to_roman(-1);
+         } catch (const std::runtime_error& re) {
+            exception_catch = true;
+            CHECK(!std::strcmp(re.what(), "not a roman numeral"));
+         }
+         CHECK(exception_catch);
       }
    }
+
    SUBCASE("roman to integer") {
       SUBCASE("single digit") {
          for (const auto& rd: detail::roman_digits)
             CHECK(from_roman(rd.second) == rd.first);
       }
+
       SUBCASE("valid input") {
-         CHECK(from_roman("") == 0);
-         CHECK(from_roman("II") == 2);
-         CHECK(from_roman("III") == 3);
+         for (const auto& r: roman)
+            CHECK(from_roman(r.first) == r.second);
       }
+
       SUBCASE("invalid input") {
-         constexpr auto not_a_roman = std::experimental::make_array("i", "IIII");
+         constexpr auto not_a_roman = std::experimental::make_array(
+               "i", "IIII", "IXIX", "IXI", "IVI", "MMMMCDXLIVI");
 
          for (const auto nar: not_a_roman) {
             bool exception_catch = false;
             CAPTURE(nar);
             try {
-               from_roman(nar);
+               auto value = from_roman(nar);
+               CAPTURE(value);
             } catch (const std::runtime_error& re) {
                exception_catch = true;
                CHECK(!std::strcmp(re.what(), "not a roman numeral"));
