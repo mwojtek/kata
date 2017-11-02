@@ -51,7 +51,7 @@ TEST_CASE("roman numerals") {
       }
 
       SUBCASE("invalid input") {
-         CHECK(v0::to_roman(-1) == "");
+         CHECK(not_throwing::to_roman(-1) == "");
 
          bool exception_catch = false;
 
@@ -81,6 +81,8 @@ TEST_CASE("roman numerals") {
                "i", "IIII", "IXIX", "IXI", "IVI", "MMMMCDXLIVI");
 
          for (const auto nar: not_a_roman) {
+            CHECK(not_throwing::from_roman(nar) == -1);
+
             bool exception_catch = false;
             CAPTURE(nar);
             try {

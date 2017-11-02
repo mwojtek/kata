@@ -24,7 +24,7 @@ struct not_a_roman_numeral_error: std::runtime_error {
 }
 
 
-namespace v0 {
+namespace not_throwing {
 
 inline std::string to_roman(int n) noexcept {
    std::stringstream oss;
@@ -36,21 +36,8 @@ inline std::string to_roman(int n) noexcept {
    return oss.str();
 }
 
-}
 
-
-inline namespace v1 {
-
-inline std::string to_roman(int n) {
-   if (n < 0)
-      throw detail::not_a_roman_numeral_error();
-   return v0::to_roman(n);
-}
-
-}
-
-
-inline int from_roman(const std::string& str) {
+inline int from_roman(const std::string& str) noexcept {
    auto n = 0;
    auto i = 0u;
    for (auto j = 0u; j < detail::roman_digits.size(); ++j) {
@@ -69,8 +56,29 @@ inline int from_roman(const std::string& str) {
       }
    }
    if (i != str.length())
-      throw detail::not_a_roman_numeral_error();
+      return -1;
    return n;
+}
+
+}
+
+
+inline namespace throwing {
+
+inline auto to_roman(int n) {
+   if (n < 0)
+      throw detail::not_a_roman_numeral_error();
+   return not_throwing::to_roman(n);
+}
+
+
+inline auto from_roman(const std::string& str) {
+   auto i = not_throwing::from_roman(str);
+   if (i < 0)
+      throw detail::not_a_roman_numeral_error();
+   return i;
+}
+
 }
 
 }
