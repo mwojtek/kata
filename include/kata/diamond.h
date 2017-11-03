@@ -1,10 +1,19 @@
 #pragma once
-#include <string>
+#include <sstream>
 
 namespace kata {
 
 std::string diamond(char c) {
-   return c == 'A' ? "A" : "";
+   std::ostringstream oss;
+   if (c >= 'A') {
+      auto dist = c-'A';
+      while (dist--)
+         oss << ' ';
+      oss << 'A';
+      if (c > 'A')
+         oss << '\n';
+   }
+   return oss.str();
 }
 
 }
