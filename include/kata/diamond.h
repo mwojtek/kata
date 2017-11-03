@@ -4,7 +4,7 @@
 namespace kata {
 
 std::string diamond(char c) {
-   return "A";
+   return c == 'A' ? "A" : "";
 }
 
 }

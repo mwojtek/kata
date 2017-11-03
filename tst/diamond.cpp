@@ -4,5 +4,6 @@
 using namespace kata;
 
 TEST_CASE("diamond") {
-   REQUIRE(diamond('A') == "A");
+   CHECK(diamond('A'-1) == "");
+   CHECK(diamond('A') == "A");
 }
