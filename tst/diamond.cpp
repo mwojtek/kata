@@ -8,7 +8,10 @@ TEST_CASE("diamond") {
    CHECK(diamond('A') == "A");
 
    SUBCASE("B") {
-      const auto str = diamond('B');
-      CHECK(str.substr(0, 3) == " A\n");
+      const auto b = diamond('B');
+      CAPTURE(b);
+      CHECK(b.substr(0, 2) == " A");
+      CHECK(b.substr(2, 1) == "\n");
+      CHECK(b.substr(3, 3) == "B B");
    }
 }
