@@ -5,13 +5,14 @@ namespace kata {
 
 std::string diamond(char c) {
    std::ostringstream oss;
-   if (c >= 'A') {
-      auto dist = c-'A';
-      while (dist--)
+   const auto n = c-'A';
+   for (auto i = 0; i <= n; ++i) {
+      for (auto j = n-i; j; --j)
          oss << ' ';
-      oss << 'A';
-      if (c > 'A')
-         oss << '\n';
+      const char lett = 'A'+i;
+      if (i)
+         oss << '\n' << lett << ' ';
+      oss << lett;
    }
    return oss.str();
 }
