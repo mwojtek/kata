@@ -23,3 +23,4 @@ Just for fun...
 # Kata
 * [FizzBuzz](http://codingdojo.org/kata/FizzBuzz)
 * [Roman Numerals](http://codingdojo.org/kata/RomanNumerals)
+* [Conway's Game of Life](http://codingdojo.org/kata/GameOfLife)
