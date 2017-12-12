@@ -24,3 +24,4 @@ Just for fun...
 * [FizzBuzz](http://codingdojo.org/kata/FizzBuzz)
 * [Roman Numerals](http://codingdojo.org/kata/RomanNumerals)
 * [Word Wrap](http://codingdojo.org/kata/WordWrap)
+* [Range](http://codingdojo.org/kata/Range)
